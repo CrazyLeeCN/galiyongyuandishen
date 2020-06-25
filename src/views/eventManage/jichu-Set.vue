@@ -1,13 +1,9 @@
 <template>
   <div class="tab-container">
-
     <el-tabs v-model="activeName" style="margin-top:15px;" type="border-card">
-      <el-tab-pane label="基础设置"><tabpane /></el-tab-pane>
-      <el-tab-pane label="摊位设置"><tabpane2 /></el-tab-pane>
-      <el-tab-pane label="宝箱奖励"><tabpane3 /></el-tab-pane>
-      <el-tab-pane label="每日任务"><tabpane4 /></el-tab-pane>
-      <el-tab-pane label="宠物奖励"><tabpane5 /></el-tab-pane>
-      <el-tab-pane label="事件位置"><tabpane6 /></el-tab-pane>
+      <el-tab-pane v-for="item in tabMapOptions" :key="item.key" :label="item.label">
+        <component :is="item.component" />
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -22,23 +18,23 @@ import TabPane6 from './components/TabPane6'
 
 export default {
   name: 'Tab',
-  components: { 
-    tabpane:TabPane, 
-    tabpane2:TabPane2,
-    tabpane3:TabPane3,
-    tabpane4:TabPane4,
-    tabpane5:TabPane5,
-    tabpane6:TabPane6
+  components: {
+    tabpane: TabPane,
+    tabpane2: TabPane2,
+    tabpane3: TabPane3,
+    tabpane4: TabPane4,
+    tabpane5: TabPane5,
+    tabpane6: TabPane6
   },
   data() {
     return {
       tabMapOptions: [
-        { label: '基础设置', key: 'CN' },
-        { label: '摊位设置', key: 'US' },
-        { label: '宝箱奖励', key: 'CN1' },
-        { label: '每日任务', key: 'CN2' },
-        { label: '宠物奖励', key: 'CN3' },
-        { label: '事件位置', key: 'CN4' },
+        { label: '基础设置', key: 'CN', component: TabPane },
+        { label: '摊位设置', key: 'US', component: TabPane2 },
+        { label: '宝箱奖励', key: 'CN1', component: TabPane3 },
+        { label: '每日任务', key: 'CN2', component: TabPane4 },
+        { label: '宠物奖励', key: 'CN3', component: TabPane5 },
+        { label: '事件位置', key: 'CN4', component: TabPane6 }
       ],
       activeName: 'CN',
       createdTimes: 0
@@ -65,7 +61,7 @@ export default {
 </script>
 
 <style scoped>
-  .tab-container {
-    margin: 30px;
-  }
+.tab-container {
+  margin: 30px;
+}
 </style>
